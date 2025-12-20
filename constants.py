@@ -1,2 +1,10 @@
 SCREEN_WIDTH = 1280
 SCREEN_HEIGHT = 720
+PLAYER_RADIUS = 20 # (the radius of the player's ship)
+LINE_WIDTH = 2 # (the width of the lines that draw the player's ship)
+PLAYER_TURN_SPEED = 300 # (the number of degrees per second that the player's ship can turn)
+PLAYER_SPEED = 200 # (the number of pixels per second that the player's ship can move forward)
+ASTEROID_MIN_RADIUS = 20
+ASTEROID_KINDS = 3
+ASTEROID_SPAWN_RATE_SECONDS = 0.8
+ASTEROID_MAX_RADIUS = ASTEROID_MIN_RADIUS * ASTEROID_KINDS
