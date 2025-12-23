@@ -3,6 +3,7 @@ import pygame
 import player
 import asteroid
 import asteroidfield
+import shot
 
 from email.headerregistry import Group
 from constants import PLAYER_RADIUS, SCREEN_HEIGHT, SCREEN_WIDTH
@@ -16,12 +17,13 @@ def main():
     # Initialize pygame
     pygame.init()
     screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
-    pyClock = pygame.time.Clock()
-    updatable = pygame.sprite.Group()
-    drawable = pygame.sprite.Group()
-    asteroids = pygame.sprite.Group()
+    pyClock = pygame.time.Clock() # Clock to control frame rate and refresh rate
+    updatable = pygame.sprite.Group() # All objectst that need to be updated
+    drawable = pygame.sprite.Group()  # All sprites that need to be drawn
+    asteroids = pygame.sprite.Group() # Asteroids in the game
+    shots = pygame.sprite.Group()  # Shots fired by the player
     
-
+    shot.Shot.containers = (updatable, drawable, shots)
     player.Player.containers = (updatable, drawable)
     asteroid.Asteroid.containers = (updatable, drawable, asteroids)
     asteroidfield.AsteroidField.containers = (updatable)
@@ -43,10 +45,11 @@ def main():
 
         for a in asteroids:
             if a.collides_with(new_player):
-                log_event("player hit")
+                print("Collision detected!", a.position, new_player.position)
+                log_event("player_hit")
                 print("Game over!")
                 sys.exit()
-                return True
+                
                
             
         for d in drawable:
